@@ -8,11 +8,12 @@
     <div class="post p2 p-responsive wrap" role="main">
       <div class="measure">
         {{ content }}
+        <br />
+        <br />
+        <br />
         <form name='sendmail' action='mailto:zhoumy@xueqiu.com'>
           <input name='subject' type='text' value='前端月刊投稿' disabled>
-          <br />
-          <br />
-          <span>投稿内容：</span><textarea name='body' type='text' value=''>
+          <span>投稿内容：</span><textarea name='body' rows='15' cols='60' type='text' value='' placeholder='输入文章链接和简要内容介绍'></textarea>
           <br />
           <br />
           <button type="submit">提交</button>
