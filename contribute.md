@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: contribute
 title: 投稿
 permalink: /contribute/
 ---

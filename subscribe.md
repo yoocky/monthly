@@ -1,5 +1,5 @@
 ---
-layout: mail
+layout: subscribe
 title: 投稿
 permalink: /subscribe/
 ---
