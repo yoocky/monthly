@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+<body>
+  <div class="site-wrap center">
+    {% include header.html %}
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        {{ content }}
+        <form name='sendmail' action='mailto:zhoumy@xueqiu.com'>
+          <input name='cc' type='text' value='jinyu@xueqiu.com'>
+          <br/>
+          <input name='subject' type='text' value='订阅前端月刊'>
+          <br/>
+          <input name='body' type='text' value=''>
+          <br/>
+          <button type="submit">订阅</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% include footer.html %}
+</body>
+</html>
