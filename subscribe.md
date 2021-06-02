@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 投稿
-permalink: /contribute/
+permalink: /subscribe/
 ---
 
 投稿请发送邮件
