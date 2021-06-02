@@ -1,0 +1,32 @@
+# Site settings
+title:       雪球前端月刊
+email:       zhoumy@xueqiu.com
+author:      Yoocky
+description: "欢迎大家积极投稿和订阅。"
+baseurl:     ""
+url:         "https://monthly.snb.design"
+
+# Google analytics
+google_analytics:
+
+# Optional features
+animated:           false
+show_related_posts: false
+show_post_footers:  true
+
+# Social icons
+show_social_icons: false
+github_username: yoocky
+twitter_username:
+google_plus_id:
+linkedin_username:
+bitcoin_url:
+paypal_url:
+flattr_button:
+
+# Build settings
+markdown:     kramdown
+permalink:    pretty
+paginate:     10
+sass:
+compressed: true
