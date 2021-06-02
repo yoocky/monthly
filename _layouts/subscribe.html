@@ -9,9 +9,13 @@
       <div class="measure">
         {{ content }}
         <form name='sendmail' action='mailto:zhoumy@xueqiu.com'>
-          <input name='subject' type='text' value='订阅前端月刊'>
-          <input name='body' type='text' value=''>
-          <button type="submit">订阅</button>
+          <input name='subject' type='text' value='前端月刊投稿' disabled>
+          <br />
+          <br />
+          <span>投稿内容：</span><textarea name='body' type='text' value=''>
+          <br />
+          <br />
+          <button type="submit">提交</button>
         </form>
       </div>
     </div>

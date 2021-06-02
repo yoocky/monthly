@@ -4,7 +4,7 @@ title: 投稿
 permalink: /contribute/
 ---
 
-投稿请发送邮件
+## 发送投稿邮件
 
 
 

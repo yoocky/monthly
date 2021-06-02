@@ -4,9 +4,7 @@ title: 关于
 permalink: /about/
 ---
 
-My english name is yoocky.
+“你有一个苹果，我有一个苹果，彼此交换一下，我们仍然是各有一个苹果；但你有一种思想，我有一种思想，彼此交换，我们就都有了两种思想，甚至更多。” ———— 萧伯纳
 
-My job is a front-end engineer, now I'm working in qihoo. 
-
-Thanks to the following to provide a platform for my blog:
+我们收集每月前端精华文章，集结成册，欢迎大家积极投稿。
 

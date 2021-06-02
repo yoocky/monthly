@@ -4,7 +4,7 @@ title: 投稿
 permalink: /subscribe/
 ---
 
-通过邮件订阅：
+## 邮件订阅
 
 
 
