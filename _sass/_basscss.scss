@@ -758,3 +758,18 @@ a:hover {
 .transition-all {
   transition: all .2s ease;
 }
+table {
+  line-height: 1.5715;
+  th {
+    padding-right: 26px;
+    &:last-child: {
+      text-align: right;
+    }
+  }
+  td {
+    color: #333;
+    &:last-child: {
+      text-align: right;
+    }
+  }
+}
