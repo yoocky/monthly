@@ -760,16 +760,17 @@ a:hover {
 }
 table {
   line-height: 1.5715;
-  th {
-    padding-right: 26px;
-    &:last-child: {
+ 
+  td {
+    color: #333;
+    &:last-child {
       text-align: right;
     }
   }
-  td {
-    color: #333;
-    &:last-child: {
-      text-align: right;
-    }
+}
+table th {
+  padding-right: 26px;
+  &:last-child {
+    text-align: right;
   }
 }
