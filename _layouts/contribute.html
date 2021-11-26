@@ -10,15 +10,21 @@
         {{ content }}
         <br />
         <br />
-        <form name='sendmail' action='mailto:zhoumy@xueqiu.com'>
-          <input name='subject' type='text' value='前端月刊投稿'>
+        <form id="contribute">
+          <span>文章标题：</span>
+          <input name='title' type='text' maxlength="100" placeholder="100字以内">
           <br />
+          <span>文章URL：</span>
+          <input name='url' type='text' maxlength="100" placeholder="256字以内">
           <br />
-          <span>投稿内容：</span>
+          <span>推荐理由：</span>
+          <textarea name='content' rows='15' cols='60' maxlength="512" value='' placeholder='请填写为什么推荐这篇文章或者该文章的简介，512字内'></textarea>
           <br />
+          <span>关键词：</span>
+          <input name='keywords' type='text' maxlength="100" placeholder="比如Javascript, 响应式。多个用逗号隔开">
           <br />
-          <textarea name='body' rows='15' cols='60' type='text' value='' placeholder='输入文章链接、摘要、推荐理由'></textarea>
-          <br />
+          <span>您的名字：</span>
+          <input name='name' type='text' maxlength="100" >
           <br />
           <button type="submit">提交</button>
         </form>
@@ -27,5 +33,48 @@
   </div>
 
   {% include footer.html %}
+  <script type="text/javascript">
+      function sendMessageFeishu(title, message) {
+        $.post('https://open.feishu.cn/open-apis/bot/v2/hook/74a7f668-073f-4408-8c18-9e003f68d263', {
+          "msg_type": "interactive",
+          "card": {
+            "config": { 
+              "wide_screen_mode": true 
+            }, 
+            "elements": [
+              {
+                "tag": "markdown",
+                "content": `${message}`
+              },
+              {
+                "actions": [
+                  {
+                    "tag": "button",
+                    "text": {
+                      "content": "预览",
+                      "tag": "plain_text"
+                    },
+                    "type": "primary",
+                    "url": `https://${env}.d38dwcjprcplx2.amplifyapp.com/`
+                  },
+                ],
+                "tag": "action"
+              }
+            ],
+            "header": {
+              "template": "blue",
+              "title": {
+                "content": title,
+                "tag": "plain_text"
+              }
+            }
+          }
+        }).then((res) => {
+          console.log("send message to feishu success.");
+        }).catch((error) => {
+          console.log(error);
+        })
+      }
+  </script>
 </body>
 </html>
