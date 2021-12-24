@@ -43,111 +43,113 @@
     function sendMessageFeishu(info) {
       $.post('https://open.feishu.cn/open-apis/bot/v2/hook/4b549669-7004-4886-a6c9-d454c3e4c69f', {
         "msg_type": "interactive",
-        "config": {
-          "wide_screen_mode": true
-        },
-        "header": {
-          "title": {
-            "tag": "plain_text",
-            "content": "你有一个新的内容推荐待审批"
-          }
-        },
-        "elements": [
-          {
-            "tag": "div",
-            "fields": [
-              {
-                "is_short": true,
-                "text": {
-                  "tag": "lark_md",
-                  "content": "**推荐人：**\n" + info.name
-                }
-              },
-              {
-                "is_short": true,
-                "text": {
-                  "tag": "lark_md",
-                  "content": "**关键词：**\n" + info.keywords
-                }
-              },
-              {
-                "is_short": false,
-                "text": {
-                  "tag": "lark_md",
-                  "content": ""
-                }
-              },
-              {
-                "is_short": false,
-                "text": {
-                  "tag": "lark_md",
-                  "content": "**文章标题：**\n" + info.title
-                }
-              },
-              {
-                "is_short": false,
-                "text": {
-                  "tag": "lark_md",
-                  "content": ""
-                }
-              },
-              {
-                "is_short": true,
-                "text": {
-                  "tag": "lark_md",
-                  "content": "**推荐理由：**\n"
-                }
-              },
-              {
-                "tag": "div",
-                "text": {
-                  "tag": "lark_md",
-                  "content": info.content
-                },
-                "extra": {
-                  "tag": "button",
+        "card": {
+          "config": {
+            "wide_screen_mode": true
+          },
+          "header": {
+            "title": {
+              "tag": "plain_text",
+              "content": "你有一个新的内容推荐待审批"
+            }
+          },
+          "elements": [
+            {
+              "tag": "div",
+              "fields": [
+                {
+                  "is_short": true,
                   "text": {
                     "tag": "lark_md",
-                    "content": "查看原文"
+                    "content": "**推荐人：**\n" + info.name
+                  }
+                },
+                {
+                  "is_short": true,
+                  "text": {
+                    "tag": "lark_md",
+                    "content": "**关键词：**\n" + info.keywords
+                  }
+                },
+                {
+                  "is_short": false,
+                  "text": {
+                    "tag": "lark_md",
+                    "content": ""
+                  }
+                },
+                {
+                  "is_short": false,
+                  "text": {
+                    "tag": "lark_md",
+                    "content": "**文章标题：**\n" + info.title
+                  }
+                },
+                {
+                  "is_short": false,
+                  "text": {
+                    "tag": "lark_md",
+                    "content": ""
+                  }
+                },
+                {
+                  "is_short": true,
+                  "text": {
+                    "tag": "lark_md",
+                    "content": "**推荐理由：**\n"
+                  }
+                },
+                {
+                  "tag": "div",
+                  "text": {
+                    "tag": "lark_md",
+                    "content": info.content
+                  },
+                  "extra": {
+                    "tag": "button",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": "查看原文"
+                    },
+                    "type": "primary",
+                    "url": info.url
+                  }
+                },
+              ]
+            },
+            {
+              "tag": "hr"
+            },
+            {
+              "tag": "action",
+              "layout": "bisected",
+              "actions": [
+                {
+                  "tag": "button",
+                  "text": {
+                    "tag": "plain_text",
+                    "content": "通过"
                   },
                   "type": "primary",
-                  "url": info.url
-                }
-              },
-            ]
-          },
-          {
-            "tag": "hr"
-          },
-          {
-            "tag": "action",
-            "layout": "bisected",
-            "actions": [
-              {
-                "tag": "button",
-                "text": {
-                  "tag": "plain_text",
-                  "content": "通过"
+                  "value": {
+                    "chosen": "approve"
+                  }
                 },
-                "type": "primary",
-                "value": {
-                  "chosen": "approve"
+                {
+                  "tag": "button",
+                  "text": {
+                    "tag": "plain_text",
+                    "content": "拒绝"
+                  },
+                  "type": "primary",
+                  "value": {
+                    "chosen": "decline"
+                  }
                 }
-              },
-              {
-                "tag": "button",
-                "text": {
-                  "tag": "plain_text",
-                  "content": "拒绝"
-                },
-                "type": "primary",
-                "value": {
-                  "chosen": "decline"
-                }
-              }
-            ]
-           }
-        ]
+              ]
+            }
+          ]
+        }
       }).then((res) => {
         alert("提交成功");
         sending = false;
