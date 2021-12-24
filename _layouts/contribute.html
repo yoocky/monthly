@@ -39,47 +39,129 @@
 
   {% include footer.html %}
   <script type="text/javascript">
-      function sendMessageFeishu(title, message) {
-        $.post('https://open.feishu.cn/open-apis/bot/v2/hook/74a7f668-073f-4408-8c18-9e003f68d263', {
-          "msg_type": "interactive",
-          "card": {
-            "config": { 
-              "wide_screen_mode": true 
-            }, 
-            "elements": [
+    var sending =false;
+    function sendMessageFeishu(info) {
+      $.post('https://open.feishu.cn/open-apis/bot/v2/hook/4b549669-7004-4886-a6c9-d454c3e4c69f', {
+        "config": {
+          "wide_screen_mode": true
+        },
+        "header": {
+          "title": {
+            "tag": "plain_text",
+            "content": "你有一个新的内容推荐待审批"
+          }
+        },
+        "elements": [
+          {
+            "tag": "div",
+            "fields": [
               {
-                "tag": "markdown",
-                "content": `${message}`
+                "is_short": true,
+                "text": {
+                  "tag": "lark_md",
+                  "content": "**推荐人：**\n" + info.name
+                }
               },
               {
-                "actions": [
-                  {
-                    "tag": "button",
-                    "text": {
-                      "content": "预览",
-                      "tag": "plain_text"
-                    },
-                    "type": "primary",
-                    "url": `https://${env}.d38dwcjprcplx2.amplifyapp.com/`
-                  },
-                ],
-                "tag": "action"
+                "is_short": true,
+                "text": {
+                  "tag": "lark_md",
+                  "content": "**关键词：**\n" + info.keywords
+                }
+              },
+              {
+                "is_short": false,
+                "text": {
+                  "tag": "lark_md",
+                  "content": ""
+                }
+              },
+              {
+                "is_short": false,
+                "text": {
+                  "tag": "lark_md",
+                  "content": "**文章标题：**\n" + info.title
+                }
+              },
+              {
+                "is_short": false,
+                "text": {
+                  "tag": "lark_md",
+                  "content": ""
+                }
+              },
+              {
+                "is_short": true,
+                "text": {
+                  "tag": "lark_md",
+                  "content": "**推荐理由：**\n" + info.content
+                }
               }
-            ],
-            "header": {
-              "template": "blue",
-              "title": {
-                "content": title,
-                "tag": "plain_text"
+            ]
+          },
+          {
+            "tag": "hr"
+          },
+          {
+            "tag": "action",
+            "layout": "bisected",
+            "actions": [
+              {
+                "tag": "button",
+                "text": {
+                  "content": "原文",
+                  "tag": "plain_text"
+                },
+                "type": "primary",
+                "url": info.url
+              },
+              {
+                "tag": "button",
+                "text": {
+                  "tag": "plain_text",
+                  "content": "通过"
+                },
+                "type": "primary",
+                "value": {
+                  "chosen": "approve"
+                }
+              },
+              {
+                "tag": "button",
+                "text": {
+                  "tag": "plain_text",
+                  "content": "拒绝"
+                },
+                "type": "primary",
+                "value": {
+                  "chosen": "decline"
+                }
               }
-            }
-          }
-        }).then((res) => {
-          console.log("send message to feishu success.");
-        }).catch((error) => {
-          console.log(error);
-        })
+            ]
+           }
+          ]
+      }).then((res) => {
+        alert("提交成功");
+        sending = false;
+      },  (error) => {
+        sending = false;
+        console.log(error);
+      });
+    }
+
+    $("#contribute").submit(function(e){
+      e.preventDefault();
+      var serializeArray = $(this).serializeArray();
+      if(serializeArray.find(item => item.value.trim() === '') || sending) {
+        return false;
       }
-  </script>
+      var info = {};
+      serializeArray.forEach(({name, value}) => {
+        info[name] = value;
+      })
+      sending = true;
+      sendMessageFeishu(info);
+    });
+</script>
 </body>
 </html>
