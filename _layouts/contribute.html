@@ -42,6 +42,7 @@
     var sending =false;
     function sendMessageFeishu(info) {
       $.post('https://open.feishu.cn/open-apis/bot/v2/hook/4b549669-7004-4886-a6c9-d454c3e4c69f', {
+        "msg_type": "interactive",
         "config": {
           "wide_screen_mode": true
         },
@@ -94,9 +95,25 @@
                 "is_short": true,
                 "text": {
                   "tag": "lark_md",
-                  "content": "**推荐理由：**\n" + info.content
+                  "content": "**推荐理由：**\n"
                 }
-              }
+              },
+              {
+                "tag": "div",
+                "text": {
+                  "tag": "lark_md",
+                  "content": info.content
+                },
+                "extra": {
+                  "tag": "button",
+                  "text": {
+                    "tag": "lark_md",
+                    "content": "查看原文"
+                  },
+                  "type": "primary",
+                  "url": info.url
+                }
+              },
             ]
           },
           {
@@ -106,15 +123,6 @@
             "tag": "action",
             "layout": "bisected",
             "actions": [
-              {
-                "tag": "button",
-                "text": {
-                  "content": "原文",
-                  "tag": "plain_text"
-                },
-                "type": "primary",
-                "url": info.url
-              },
               {
                 "tag": "button",
                 "text": {
@@ -139,7 +147,7 @@
               }
             ]
            }
-          ]
+        ]
       }).then((res) => {
         alert("提交成功");
         sending = false;
@@ -163,5 +171,6 @@
       sendMessageFeishu(info);
     });
 </script>
+
 </body>
 </html>
