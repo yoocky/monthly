@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% include head.html %}
+
 <body>
   <div class="site-wrap">
     {% include header.html %}
@@ -20,7 +21,8 @@
           <br />
           <br />
           <span>推荐理由：</span>
-          <textarea name='content' rows='15' cols='60' maxlength="512" value='' placeholder='请填写为什么推荐这篇文章或者该文章的简介，512字内'></textarea>
+          <textarea name='content' rows='15' cols='60' maxlength="512" value=''
+            placeholder='请填写为什么推荐这篇文章或者该文章的简介，512字内'></textarea>
           <br />
           <br />
           <span>关键词：</span>
@@ -28,7 +30,7 @@
           <br />
           <br />
           <span>您的名字：</span>
-          <input name='name' type='text' maxlength="100" >
+          <input name='name' type='text' maxlength="100">
           <br />
           <br />
           <button type="submit">提交</button>
@@ -38,10 +40,11 @@
   </div>
 
   {% include footer.html %}
+  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
-    var sending =false;
+    var sending = false;
     function sendMessageFeishu(info) {
-      $.post('https://open.feishu.cn/open-apis/bot/v2/hook/4b549669-7004-4886-a6c9-d454c3e4c69f', {
+      axios.post('https://open.feishu.cn/open-apis/bot/v2/hook/4b549669-7004-4886-a6c9-d454c3e4c69f', {
         "msg_type": "interactive",
         "card": {
           "config": {
@@ -50,7 +53,7 @@
           "header": {
             "title": {
               "tag": "plain_text",
-              "content": "你有一个新的内容推荐待审批"
+              "content": "你有一个新的内容推荐"
             }
           },
           "elements": [
@@ -98,81 +101,53 @@
                     "tag": "lark_md",
                     "content": "**推荐理由：**\n"
                   }
-                },
-                {
-                  "tag": "div",
-                  "text": {
-                    "tag": "lark_md",
-                    "content": info.content
-                  },
-                  "extra": {
-                    "tag": "button",
-                    "text": {
-                      "tag": "lark_md",
-                      "content": "查看原文"
-                    },
-                    "type": "primary",
-                    "url": info.url
-                  }
-                },
-              ]
-            },
-            {
-              "tag": "hr"
-            },
-            {
-              "tag": "action",
-              "layout": "bisected",
-              "actions": [
-                {
-                  "tag": "button",
-                  "text": {
-                    "tag": "plain_text",
-                    "content": "通过"
-                  },
-                  "type": "primary",
-                  "value": {
-                    "chosen": "approve"
-                  }
-                },
-                {
-                  "tag": "button",
-                  "text": {
-                    "tag": "plain_text",
-                    "content": "拒绝"
-                  },
-                  "type": "primary",
-                  "value": {
-                    "chosen": "decline"
-                  }
                 }
               ]
+            },
+            {
+              "tag": "div",
+              "text": {
+                "tag": "lark_md",
+                "content": info.content
+              },
+              "extra": {
+                "tag": "button",
+                "text": {
+                  "tag": "lark_md",
+                  "content": "原文"
+                },
+                "type": "primary",
+                "url": info.url
+              }
             }
           ]
         }
+      }, {
+        withCredentials: true
       }).then((res) => {
-        alert("提交成功");
         sending = false;
-      },  (error) => {
+        console.log(res);
+      }).catch((error) => {
         sending = false;
         console.log(error);
-      });
+      })
     }
 
-    $("#contribute").submit(function(e){
+    $("#contribute").submit(function (e) {
       e.preventDefault();
       var serializeArray = $(this).serializeArray();
-      if(serializeArray.find(item => item.value.trim() === '') || sending) {
+      if (serializeArray.find(item => item.value.trim() === '') || sending) {
         return false;
       }
       var info = {};
-      serializeArray.forEach(({name, value}) => {
+      serializeArray.forEach(({ name, value }) => {
         info[name] = value;
       })
       sending = true;
       sendMessageFeishu(info);
     });
-</script>
+  </script>
 
 </body>
+
 </html>
