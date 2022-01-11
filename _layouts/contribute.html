@@ -126,9 +126,10 @@
         withCredentials: true
       }).then((res) => {
         sending = false;
-        console.log(res);
+        alert("提交成功")
       }).catch((error) => {
         sending = false;
+        alert("提交失败")
         console.log(error);
       })
     }
