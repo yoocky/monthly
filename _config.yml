@@ -3,7 +3,7 @@ title:       雪球大前端月刊
 email:       zhoumy@xueqiu.com
 author:      Yoocky
 description: "欢迎大家积极投稿和订阅。"
-baseurl:     ""
+baseurl:     "/monthly/"
 url:         "https://yoocky.github.io/monthly/"
 
 # Google analytics
